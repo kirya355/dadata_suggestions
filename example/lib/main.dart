@@ -32,16 +32,14 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(24),
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: "Paste Dadata API token and press enter",
-            ),
-            onSubmitted: (string) {
+          child: TextButton(
+            child: Text('Press enter'),
+            onPressed: () {
               Navigator.of(context).push(
                 PageRouteBuilder(
                   opaque: false,
                   pageBuilder: (BuildContext context, a, b) {
-                    return SuggestionsScreen(token: string);
+                    return SuggestionsScreen(token: '2d1e723491f103a22380a0c1aae66ff68dbd9596');
                   },
                 ),
               );
