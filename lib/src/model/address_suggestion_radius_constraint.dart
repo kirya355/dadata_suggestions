@@ -6,10 +6,10 @@ part 'address_suggestion_radius_constraint.g.dart';
 @JsonSerializable(explicitToJson: true, nullable: true)
 class AddressSuggestionRadiusConstraint {
   @JsonKey(name: "lat", required: true)
-  double latitude;
+  double? latitude;
 
   @JsonKey(name: "lon", required: true)
-  double longitude;
+  double? longitude;
 
   int _radiusMeters = 100;
 
@@ -37,11 +37,10 @@ class AddressSuggestionRadiusConstraint {
   AddressSuggestionRadiusConstraint({
     this.latitude,
     this.longitude,
-    int radiusMeters,
+    int radiusMeters = 100,
   }) : this._radiusMeters = radiusMeters;
 
-  AddressSuggestionRadiusConstraint.fromString(String latLon,
-      {String delimiter = ','}) {
+  AddressSuggestionRadiusConstraint.fromString(String latLon, {String delimiter = ','}) {
     final llParts = latLon.split(delimiter);
     if (llParts.length != 2) {
       throw 'Query string can not be split: wrong format or delimiter';
@@ -57,10 +56,7 @@ class AddressSuggestionRadiusConstraint {
     );
   }
 
-  factory AddressSuggestionRadiusConstraint.fromJson(
-          Map<String, dynamic> json) =>
-      _$AddressSuggestionRadiusConstraintFromJson(json);
+  factory AddressSuggestionRadiusConstraint.fromJson(Map<String, dynamic> json) => _$AddressSuggestionRadiusConstraintFromJson(json);
 
-  Map<String, dynamic> toJson() =>
-      _$AddressSuggestionRadiusConstraintToJson(this);
+  Map<String, dynamic> toJson() => _$AddressSuggestionRadiusConstraintToJson(this);
 }

@@ -5,7 +5,7 @@ enum LevelBoundry { country, region, area, city, settlement, street, house }
 /// Helper extension of [LevelBoundry] enum.
 extension LevelBoundryValue on LevelBoundry {
   /// Returns string value of a enum case.
-  String get value {
+  String? get value {
     switch (this) {
       case LevelBoundry.country:
         return 'country';
@@ -35,7 +35,7 @@ extension LevelBoundryValue on LevelBoundry {
 
   /// Converts string [value] to enum case if available.
   /// Please check [LevelBoundry] for available cases.
-  static LevelBoundry forValue(String value) {
+  static LevelBoundry? forValue(String value) {
     switch (value) {
       case 'country':
         return LevelBoundry.country;

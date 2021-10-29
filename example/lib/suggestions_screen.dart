@@ -5,14 +5,14 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 class SuggestionsScreen extends StatefulWidget {
   final String token;
 
-  SuggestionsScreen({Key key, this.token}) : super(key: key);
+  SuggestionsScreen({Key? key, required this.token}) : super(key: key);
 
   @override
   _SuggestionsScreenState createState() => _SuggestionsScreenState();
 }
 
 class _SuggestionsScreenState extends State<SuggestionsScreen> {
-  DadataSuggestions _suggestions;
+  DadataSuggestions? _suggestions;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _SuggestionsScreenState extends State<SuggestionsScreen> {
                 return Container(
                   child: Padding(
                     padding: EdgeInsets.all(12),
-                    child: Text(s.unrestrictedValue),
+                    child: Text('${s.unrestrictedValue}'),
                   ),
                 );
               },
@@ -52,14 +52,14 @@ class _SuggestionsScreenState extends State<SuggestionsScreen> {
       print("found lat $lat lon $lon");
       if (lat != null && lon != null) {
         try {
-          final resp = await _suggestions.revGeocode(
+          final resp = await _suggestions?.revGeocode(
             RevgeocodeSuggestionRequest(
               latitude: lat,
               longitude: lon,
             ),
           );
-          if (resp != null && resp.suggestions.isNotEmpty) {
-            return resp.suggestions;
+          if (resp != null && (resp.suggestions?.isNotEmpty??false)) {
+            return resp.suggestions!;
           }
         } catch (e) {
           print("Caught error in revgeocode $e");
@@ -67,13 +67,13 @@ class _SuggestionsScreenState extends State<SuggestionsScreen> {
       }
     }
     try {
-      final resp = await _suggestions.suggest(
+      final resp = await _suggestions?.suggest(
         AddressSuggestionRequest(
           text,
         ),
       );
-      if (resp != null && resp.suggestions.isNotEmpty) {
-        return resp.suggestions;
+      if (resp != null && (resp.suggestions?.isNotEmpty??false)) {
+        return resp.suggestions!;
       }
     } catch (e) {
       print("Caught error in suggestion query $e");
