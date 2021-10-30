@@ -47,7 +47,7 @@ class DadataClient {
         headers: _headers,
         body: jsonEncode(query),
       );
-      if (resp?.body?.isNotEmpty ?? false) {
+      if (resp.body.isNotEmpty) {
         return AddressResponse.fromJson(jsonDecode(resp.body));
       }
       return null;
